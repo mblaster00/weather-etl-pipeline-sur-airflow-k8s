@@ -29,7 +29,7 @@ Built as a hands-on deep dive into **Data Engineering fundamentals** with a focu
 
 **What makes this non-trivial:**
 
-- Each ETL task runs in its own **ephemeral Kubernetes pod** (`KubernetesPodOperator`) — full isolation, independent scaling, no shared state
+- Each ETL task runs in its own **ephemeral Kubernetes pod** (`KubernetesPodOperator`) full isolation, independent scaling, no shared state
 - Infrastructure is **fully reproducible** from a single `terraform apply`
 - DAGs sync automatically from GitHub **no redeploy needed** to ship pipeline changes
 - Cloud SQL access via **Workload Identity** no static credentials anywhere in the cluster
