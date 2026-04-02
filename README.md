@@ -25,14 +25,14 @@
 
 This project implements a **cloud-native, fault-tolerant ETL pipeline** that ingests hourly weather data from the [OpenWeatherMap API](https://openweathermap.org/api), transforms it, and persists it to a managed PostgreSQL database on GCP.
 
-Built as a hands-on deep dive into **Data Engineering fundamentals** — with a focus on production patterns: isolated task execution, declarative infrastructure, zero-secret deployments via Workload Identity, and GitOps-style DAG delivery.
+Built as a hands-on deep dive into **Data Engineering fundamentals** with a focus on production patterns: isolated task execution, declarative infrastructure, zero-secret deployments via Workload Identity, and GitOps-style DAG delivery.
 
 **What makes this non-trivial:**
 
 - Each ETL task runs in its own **ephemeral Kubernetes pod** (`KubernetesPodOperator`) — full isolation, independent scaling, no shared state
 - Infrastructure is **fully reproducible** from a single `terraform apply`
-- DAGs sync automatically from GitHub — **no redeploy needed** to ship pipeline changes
-- Cloud SQL access via **Workload Identity** — no static credentials anywhere in the cluster
+- DAGs sync automatically from GitHub **no redeploy needed** to ship pipeline changes
+- Cloud SQL access via **Workload Identity** no static credentials anywhere in the cluster
 
 ---
 
