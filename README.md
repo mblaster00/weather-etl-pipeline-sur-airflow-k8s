@@ -182,6 +182,6 @@ Enable the `weather_etl` DAG and trigger a first run manually to validate the fu
 
 <div align="center">
 
-Built to learn. Designed for production.
+Designed for production.
 
 </div>
