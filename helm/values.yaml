@@ -7,11 +7,11 @@ webserver:
   defaultUser:
     enabled: true
     role: Admin
-    username: meisterpod
+    username: username
     email: email@example.com
     firstName: firstname
     lastName: lastname
-    password: "placeholder"
+    password: "password"
 
 secret:
   - envName: AIRFLOW__WEBSERVER__SECRET_KEY
