@@ -58,6 +58,10 @@ resource "google_sql_database_instance" "postgres" {
 
   depends_on = [google_service_networking_connection.private_vpc_connection]
 
+  lifecycle {
+    ignore_changes = [settings]
+  }
+
   settings {
     tier = "db-f1-micro"
 
@@ -78,4 +82,32 @@ resource "google_sql_database_instance" "postgres" {
 resource "google_sql_database" "weather" {
   name     = "weather"
   instance = google_sql_database_instance.postgres.name
+}
+
+# GCP Service Account for the ETL pods
+resource "google_service_account" "airflow_pods" {
+  account_id   = "airflow-pods-sa"
+  display_name = "Airflow ETL Pods"
+  project      = var.project_id
+}
+
+# Grant Cloud SQL access
+resource "google_project_iam_member" "cloudsql_client" {
+  project = var.project_id
+  role    = "roles/cloudsql.client"
+  member  = "serviceAccount:${google_service_account.airflow_pods.email}"
+}
+
+# Grant Cloud Storage access
+resource "google_project_iam_member" "storage_admin" {
+  project = var.project_id
+  role    = "roles/storage.objectAdmin"
+  member  = "serviceAccount:${google_service_account.airflow_pods.email}"
+}
+
+# Bind GCP Service Account to Kubernetes Service Account
+resource "google_service_account_iam_member" "workload_identity" {
+  service_account_id = google_service_account.airflow_pods.name
+  role               = "roles/iam.workloadIdentityUser"
+  member             = "serviceAccount:${var.project_id}.svc.id.goog[airflow/airflow-pods-ksa]"
 }

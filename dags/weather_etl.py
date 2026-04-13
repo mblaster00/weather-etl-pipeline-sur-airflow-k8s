@@ -6,19 +6,16 @@ from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import (
 )
 from kubernetes.client import models as k8s
 
-IMAGE = "europe-west1-docker.pkg.dev/YOUR_PROJECT/weather-etl:latest"
+IMAGE = "europe-west1-docker.pkg.dev/weather-etl-airflow/weather-etl/weather-etl:latest"
 
 default_args = {
-    "owner": "omar",
+    "owner": "meisterpod",
     "retries": 3,
     "retry_delay": timedelta(minutes=5),
     "execution_timeout": timedelta(minutes=30),
-    "on_failure_callback": None,  # Add a Slack/email notifier here later
 }
 
-# Secrets injected as env vars into every pod
 env_vars = [
-    # OpenWeatherMap API key — from Kubernetes Secret
     k8s.V1EnvVar(
         name="OPENWEATHER_API_KEY",
         value_from=k8s.V1EnvVarSource(
@@ -28,7 +25,6 @@ env_vars = [
             )
         ),
     ),
-    # Cloud SQL host — from Kubernetes Secret
     k8s.V1EnvVar(
         name="CLOUDSQL_HOST",
         value_from=k8s.V1EnvVarSource(
@@ -38,7 +34,6 @@ env_vars = [
             )
         ),
     ),
-    # Cloud SQL database name — from Kubernetes Secret
     k8s.V1EnvVar(
         name="CLOUDSQL_DATABASE",
         value_from=k8s.V1EnvVarSource(
