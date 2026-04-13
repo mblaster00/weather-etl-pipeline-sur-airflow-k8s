@@ -10,7 +10,7 @@ default_args = {
 
 with DAG(
     dag_id="weather_etl",
-    schedule_interval="@hourly",
+    schedule="@hourly",
     start_date=datetime(2024, 1, 1),
     catchup=False,
     default_args=default_args,
