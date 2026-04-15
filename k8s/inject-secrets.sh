@@ -18,6 +18,11 @@ echo "All secrets pulled successfully."
 
 echo "Injecting into Kubernetes Secrets..."
 
+# Note: gitSync SSH key must be generated separately
+# kubectl create secret generic airflow-gitsync-ssh \
+#   --from-file=gitSshKey=./airflow-gitsync-key \
+#   --namespace airflow
+
 kubectl create secret generic cloudsql-postgres-secret \
   --from-literal=password=$CLOUDSQL_PASSWORD \
   --namespace airflow \

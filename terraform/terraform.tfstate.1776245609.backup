@@ -1,0 +1,577 @@
+{
+  "version": 4,
+  "terraform_version": "1.14.8",
+  "serial": 32,
+  "lineage": "0990016e-b9a0-592e-ecd4-f6d27b26995a",
+  "outputs": {
+    "cloudsql_private_ip": {
+      "value": "10.26.0.3",
+      "type": "string"
+    },
+    "cluster_name": {
+      "value": "weather-etl-cluster",
+      "type": "string"
+    },
+    "kubectl_command": {
+      "value": "gcloud container clusters get-credentials weather-etl-cluster --region europe-west1 --project weather-etl-airflow",
+      "type": "string"
+    },
+    "region": {
+      "value": "europe-west1",
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "google_compute_global_address",
+      "name": "private_ip_range",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address": "10.26.0.0",
+            "address_type": "INTERNAL",
+            "creation_timestamp": "2026-04-10T07:57:53.532-07:00",
+            "description": "",
+            "effective_labels": {},
+            "id": "projects/weather-etl-airflow/global/addresses/google-managed-services-range",
+            "ip_version": "",
+            "label_fingerprint": "42WmSpB8rSM=",
+            "labels": {},
+            "name": "google-managed-services-range",
+            "network": "https://www.googleapis.com/compute/v1/projects/weather-etl-airflow/global/networks/weather-etl-cluster-vpc",
+            "prefix_length": 16,
+            "project": "weather-etl-airflow",
+            "purpose": "VPC_PEERING",
+            "self_link": "https://www.googleapis.com/compute/v1/projects/weather-etl-airflow/global/addresses/google-managed-services-range",
+            "terraform_labels": {},
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "google_compute_network.vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_compute_network",
+      "name": "vpc",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "auto_create_subnetworks": false,
+            "delete_default_routes_on_create": false,
+            "description": "",
+            "enable_ula_internal_ipv6": false,
+            "gateway_ipv4": "",
+            "id": "projects/weather-etl-airflow/global/networks/weather-etl-cluster-vpc",
+            "internal_ipv6_range": "",
+            "mtu": 0,
+            "name": "weather-etl-cluster-vpc",
+            "network_firewall_policy_enforcement_order": "AFTER_CLASSIC_FIREWALL",
+            "numeric_id": "6427189704209512585",
+            "project": "weather-etl-airflow",
+            "routing_mode": "REGIONAL",
+            "self_link": "https://www.googleapis.com/compute/v1/projects/weather-etl-airflow/global/networks/weather-etl-cluster-vpc",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19"
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_compute_subnetwork",
+      "name": "subnet",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "creation_timestamp": "2026-04-10T07:17:33.961-07:00",
+            "description": "",
+            "external_ipv6_prefix": "",
+            "fingerprint": null,
+            "gateway_address": "10.0.0.1",
+            "id": "projects/weather-etl-airflow/regions/europe-west1/subnetworks/weather-etl-cluster-subnet",
+            "internal_ipv6_prefix": "",
+            "ip_cidr_range": "10.0.0.0/24",
+            "ipv6_access_type": "",
+            "ipv6_cidr_range": "",
+            "log_config": [],
+            "name": "weather-etl-cluster-subnet",
+            "network": "https://www.googleapis.com/compute/v1/projects/weather-etl-airflow/global/networks/weather-etl-cluster-vpc",
+            "private_ip_google_access": true,
+            "private_ipv6_google_access": "DISABLE_GOOGLE_ACCESS",
+            "project": "weather-etl-airflow",
+            "purpose": "PRIVATE",
+            "region": "europe-west1",
+            "role": "",
+            "secondary_ip_range": [],
+            "self_link": "https://www.googleapis.com/compute/v1/projects/weather-etl-airflow/regions/europe-west1/subnetworks/weather-etl-cluster-subnet",
+            "send_secondary_ip_range_if_empty": null,
+            "stack_type": "IPV4_ONLY",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "google_compute_network.vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_container_cluster",
+      "name": "primary",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "status": "tainted",
+          "schema_version": 2,
+          "attributes": {
+            "addons_config": null,
+            "allow_net_admin": null,
+            "authenticator_groups_config": null,
+            "binary_authorization": [],
+            "cluster_autoscaling": null,
+            "cluster_ipv4_cidr": null,
+            "confidential_nodes": null,
+            "cost_management_config": null,
+            "database_encryption": null,
+            "datapath_provider": null,
+            "default_max_pods_per_node": null,
+            "default_snat_status": null,
+            "deletion_protection": false,
+            "description": null,
+            "dns_config": [],
+            "enable_autopilot": false,
+            "enable_cilium_clusterwide_network_policy": false,
+            "enable_intranode_visibility": null,
+            "enable_k8s_beta_apis": [],
+            "enable_kubernetes_alpha": false,
+            "enable_l4_ilb_subsetting": false,
+            "enable_legacy_abac": false,
+            "enable_multi_networking": false,
+            "enable_shielded_nodes": true,
+            "enable_tpu": null,
+            "endpoint": null,
+            "fleet": [],
+            "gateway_api_config": null,
+            "id": "projects/weather-etl-airflow/locations/europe-west1/clusters/weather-etl-cluster",
+            "identity_service_config": null,
+            "initial_node_count": 2,
+            "ip_allocation_policy": null,
+            "label_fingerprint": null,
+            "location": "europe-west1",
+            "logging_config": null,
+            "logging_service": null,
+            "maintenance_policy": [],
+            "master_auth": null,
+            "master_authorized_networks_config": null,
+            "master_version": null,
+            "mesh_certificates": null,
+            "min_master_version": null,
+            "monitoring_config": null,
+            "monitoring_service": null,
+            "name": "weather-etl-cluster",
+            "network": "weather-etl-cluster-vpc",
+            "network_policy": [],
+            "networking_mode": "VPC_NATIVE",
+            "node_config": [
+              {
+                "advanced_machine_features": [],
+                "boot_disk_kms_key": "",
+                "confidential_nodes": [],
+                "containerd_config": [],
+                "disk_size_gb": 50,
+                "disk_type": "",
+                "effective_taints": [],
+                "enable_confidential_storage": false,
+                "ephemeral_storage_local_ssd_config": [],
+                "fast_socket": [],
+                "gcfs_config": [],
+                "guest_accelerator": [],
+                "gvnic": [],
+                "host_maintenance_policy": [],
+                "image_type": "",
+                "kubelet_config": [],
+                "labels": {},
+                "linux_node_config": [],
+                "local_nvme_ssd_block_config": [],
+                "local_ssd_count": 0,
+                "logging_variant": "",
+                "machine_type": "e2-standard-2",
+                "metadata": {},
+                "min_cpu_platform": "",
+                "node_group": "",
+                "oauth_scopes": [
+                  "https://www.googleapis.com/auth/cloud-platform"
+                ],
+                "preemptible": false,
+                "reservation_affinity": [],
+                "resource_labels": null,
+                "resource_manager_tags": null,
+                "secondary_boot_disks": [],
+                "service_account": "",
+                "shielded_instance_config": [],
+                "sole_tenant_config": [],
+                "spot": false,
+                "tags": null,
+                "taint": [],
+                "workload_metadata_config": []
+              }
+            ],
+            "node_locations": [],
+            "node_pool": null,
+            "node_pool_auto_config": null,
+            "node_pool_defaults": null,
+            "node_version": null,
+            "notification_config": null,
+            "operation": null,
+            "private_cluster_config": [],
+            "private_ipv6_google_access": null,
+            "project": null,
+            "release_channel": null,
+            "remove_default_node_pool": null,
+            "resource_labels": null,
+            "resource_usage_export_config": [],
+            "security_posture_config": null,
+            "self_link": null,
+            "service_external_ips_config": null,
+            "services_ipv4_cidr": null,
+            "subnetwork": "weather-etl-cluster-subnet",
+            "timeouts": null,
+            "tpu_ipv4_cidr_block": null,
+            "vertical_pod_autoscaling": null,
+            "workload_identity_config": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoyNDAwMDAwMDAwMDAwLCJkZWxldGUiOjI0MDAwMDAwMDAwMDAsInJlYWQiOjI0MDAwMDAwMDAwMDAsInVwZGF0ZSI6MzYwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMiJ9",
+          "dependencies": [
+            "google_compute_network.vpc",
+            "google_compute_subnetwork.subnet"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_project_iam_member",
+      "name": "cloudsql_client",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "condition": [],
+            "etag": "BwZPVNNQteI=",
+            "id": "weather-etl-airflow/roles/cloudsql.client/serviceAccount:airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com",
+            "member": "serviceAccount:airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com",
+            "project": "weather-etl-airflow",
+            "role": "roles/cloudsql.client"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "google_service_account.airflow_pods"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_project_iam_member",
+      "name": "storage_admin",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "condition": [],
+            "etag": "BwZPVNNQteI=",
+            "id": "weather-etl-airflow/roles/storage.objectAdmin/serviceAccount:airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com",
+            "member": "serviceAccount:airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com",
+            "project": "weather-etl-airflow",
+            "role": "roles/storage.objectAdmin"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "google_service_account.airflow_pods"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_service_account",
+      "name": "airflow_pods",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_id": "airflow-pods-sa",
+            "create_ignore_already_exists": null,
+            "description": "",
+            "disabled": false,
+            "display_name": "Airflow ETL Pods",
+            "email": "airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com",
+            "id": "projects/weather-etl-airflow/serviceAccounts/airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com",
+            "member": "serviceAccount:airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com",
+            "name": "projects/weather-etl-airflow/serviceAccounts/airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com",
+            "project": "weather-etl-airflow",
+            "timeouts": null,
+            "unique_id": "100029606915944578447"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDB9fQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_service_account_iam_member",
+      "name": "workload_identity",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "condition": [],
+            "etag": "BwZPVNMcCtY=",
+            "id": "projects/weather-etl-airflow/serviceAccounts/airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com/roles/iam.workloadIdentityUser/serviceAccount:weather-etl-airflow.svc.id.goog[airflow/airflow-pods-ksa]",
+            "member": "serviceAccount:weather-etl-airflow.svc.id.goog[airflow/airflow-pods-ksa]",
+            "role": "roles/iam.workloadIdentityUser",
+            "service_account_id": "projects/weather-etl-airflow/serviceAccounts/airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "google_service_account.airflow_pods"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_service_networking_connection",
+      "name": "private_vpc_connection",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "deletion_policy": null,
+            "id": "projects%2Fweather-etl-airflow%2Fglobal%2Fnetworks%2Fweather-etl-cluster-vpc:servicenetworking.googleapis.com",
+            "network": "projects/weather-etl-airflow/global/networks/weather-etl-cluster-vpc",
+            "peering": "servicenetworking-googleapis-com",
+            "reserved_peering_ranges": [
+              "google-managed-services-range"
+            ],
+            "service": "servicenetworking.googleapis.com",
+            "timeouts": null,
+            "update_on_creation_fail": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "google_compute_global_address.private_ip_range",
+            "google_compute_network.vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_sql_database",
+      "name": "weather",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "charset": "UTF8",
+            "collation": "en_US.UTF8",
+            "deletion_policy": "DELETE",
+            "id": "projects/weather-etl-airflow/instances/weather-etl-db/databases/weather",
+            "instance": "weather-etl-db",
+            "name": "weather",
+            "project": "weather-etl-airflow",
+            "self_link": "https://sqladmin.googleapis.com/sql/v1beta4/projects/weather-etl-airflow/instances/weather-etl-db/databases/weather",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMCJ9",
+          "dependencies": [
+            "google_compute_global_address.private_ip_range",
+            "google_compute_network.vpc",
+            "google_service_networking_connection.private_vpc_connection",
+            "google_sql_database_instance.postgres"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_sql_database_instance",
+      "name": "postgres",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "available_maintenance_versions": [],
+            "clone": [],
+            "connection_name": "weather-etl-airflow:europe-west1:weather-etl-db",
+            "database_version": "POSTGRES_15",
+            "deletion_protection": false,
+            "dns_name": "",
+            "encryption_key_name": null,
+            "first_ip_address": "10.26.0.3",
+            "id": "weather-etl-db",
+            "instance_type": "CLOUD_SQL_INSTANCE",
+            "ip_address": [
+              {
+                "ip_address": "10.26.0.3",
+                "time_to_retire": "",
+                "type": "PRIVATE"
+              }
+            ],
+            "maintenance_version": "POSTGRES_15_17.R20260319.00_02",
+            "master_instance_name": "",
+            "name": "weather-etl-db",
+            "private_ip_address": "10.26.0.3",
+            "project": "weather-etl-airflow",
+            "psc_service_attachment_link": "",
+            "public_ip_address": "",
+            "region": "europe-west1",
+            "replica_configuration": [],
+            "restore_backup_context": [],
+            "root_password": null,
+            "self_link": "https://sqladmin.googleapis.com/sql/v1beta4/projects/weather-etl-airflow/instances/weather-etl-db",
+            "server_ca_cert": [
+              {
+                "cert": "-----BEGIN CERTIFICATE-----\nMIIDcTCCAlmgAwIBAgIBADANBgkqhkiG9w0BAQsFADBwMS0wKwYDVQQuEyRmMmFj\nYjkwNS04ZjdlLTRmN2QtYWY1Yy1kNDAwZGFjODUxYzIxHDAaBgNVBAMTE0Nsb3Vk\nIFNRTCBTZXJ2ZXIgQ0ExFDASBgNVBAoTC0dvb2dsZSwgSW5jMQswCQYDVQQGEwJV\nUzAeFw0yNjA0MTAxNTAzMDJaFw0zNjA0MDcxNTA0MDJaMHAxLTArBgNVBC4TJGYy\nYWNiOTA1LThmN2UtNGY3ZC1hZjVjLWQ0MDBkYWM4NTFjMjEcMBoGA1UEAxMTQ2xv\ndWQgU1FMIFNlcnZlciBDQTEUMBIGA1UEChMLR29vZ2xlLCBJbmMxCzAJBgNVBAYT\nAlVTMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuZvrRSXRQIbmcIJo\nveePaJc3D9Q2jxtEwbol5m4zoBzq81m0V92yn3Ibk+UTeooCfZnmm2i6cD8TG1qi\nA/4S4XHouP8v6qpxiRXQ1Zgyzj9DQuICvBSr27VruTHUnJHWAppJXrujdb+S3skr\nffmadwJL/3U+QzSLVPNCsMGmgogVWKNy/tWQqedlVsFExYSu6v4cW609WVGnARjv\n4N090kCvacum+Yss1Z9iV5E74KHVRv2lksaFl42KRBssoRODXC7/KMfID9Uw0Med\njtshvFtAqpdyG/ZKx8DEnKY7ev9CuNY/pVXBE85/vLXFqrEkClEFW2ghDHwE6eUJ\nBYx2CQIDAQABoxYwFDASBgNVHRMBAf8ECDAGAQH/AgEAMA0GCSqGSIb3DQEBCwUA\nA4IBAQBXNbyS2XcmdTpAjQhmrQAc75jn6XgC9AFkJMVKjHG5iG712Plb5df+0lP0\n6cqiktJNeRuBDDU5TcE+P16xN3KbDWX4n/hi45LYCKIcrEwekJGPndlgZ2dQiaqM\n+r2TqdDjlGK5v4ecvyz6k1hP6ZHvDidXeVzrxRF+XRzBzkfd+rIJ1qXK7PyEuHKW\nAbfNCH1BUS8CW2g4B7bevYCI94wDwLYpDjP2QM6SjKKMntSFgmqypTgyElW+53KP\nDAMWUA9Xzz/7DZIaCJhwcaBY0icYDvZuTUnPIIJ9t+m845XqDDNqs9quxtlbdUKi\nrrqRxVinOuc+BSwdZM4aOw5CT9NW\n-----END CERTIFICATE-----",
+                "common_name": "C=US,O=Google\\, Inc,CN=Cloud SQL Server CA,dnQualifier=f2acb905-8f7e-4f7d-af5c-d400dac851c2",
+                "create_time": "2026-04-10T15:03:02.790Z",
+                "expiration_time": "2036-04-07T15:04:02.790Z",
+                "sha1_fingerprint": "a563769ce6369e3aedb7ee8438a900faf4b8687b"
+              }
+            ],
+            "service_account_email_address": "p513587268776-2ier7w@gcp-sa-cloud-sql.iam.gserviceaccount.com",
+            "settings": [
+              {
+                "activation_policy": "ALWAYS",
+                "active_directory_config": [],
+                "advanced_machine_features": [],
+                "availability_type": "ZONAL",
+                "backup_configuration": [
+                  {
+                    "backup_retention_settings": [
+                      {
+                        "retained_backups": 7,
+                        "retention_unit": "COUNT"
+                      }
+                    ],
+                    "binary_log_enabled": false,
+                    "enabled": true,
+                    "location": "",
+                    "point_in_time_recovery_enabled": false,
+                    "start_time": "23:00",
+                    "transaction_log_retention_days": 7
+                  }
+                ],
+                "collation": "",
+                "connector_enforcement": "NOT_REQUIRED",
+                "data_cache_config": [],
+                "database_flags": [],
+                "deletion_protection_enabled": false,
+                "deny_maintenance_period": [],
+                "disk_autoresize": true,
+                "disk_autoresize_limit": 0,
+                "disk_size": 10,
+                "disk_type": "PD_SSD",
+                "edition": "ENTERPRISE",
+                "enable_dataplex_integration": false,
+                "enable_google_ml_integration": false,
+                "insights_config": [],
+                "ip_configuration": [
+                  {
+                    "allocated_ip_range": "",
+                    "authorized_networks": [],
+                    "enable_private_path_for_google_cloud_services": false,
+                    "ipv4_enabled": false,
+                    "private_network": "projects/weather-etl-airflow/global/networks/weather-etl-cluster-vpc",
+                    "psc_config": [],
+                    "require_ssl": false,
+                    "server_ca_mode": "GOOGLE_MANAGED_INTERNAL_CA",
+                    "ssl_mode": ""
+                  }
+                ],
+                "location_preference": [
+                  {
+                    "follow_gae_application": "",
+                    "secondary_zone": "",
+                    "zone": "europe-west1-b"
+                  }
+                ],
+                "maintenance_window": [],
+                "password_validation_policy": [],
+                "pricing_plan": "PER_USE",
+                "sql_server_audit_config": [],
+                "tier": "db-f1-micro",
+                "time_zone": "",
+                "user_labels": {},
+                "version": 13
+              }
+            ],
+            "timeouts": null
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "root_password"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "server_ca_cert"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo1NDAwMDAwMDAwMDAwLCJkZWxldGUiOjU0MDAwMDAwMDAwMDAsInVwZGF0ZSI6NTQwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "google_compute_global_address.private_ip_range",
+            "google_compute_network.vpc",
+            "google_service_networking_connection.private_vpc_connection"
+          ]
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}

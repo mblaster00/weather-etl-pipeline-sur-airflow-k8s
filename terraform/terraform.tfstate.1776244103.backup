@@ -1,0 +1,1596 @@
+{
+  "version": 4,
+  "terraform_version": "1.14.8",
+  "serial": 27,
+  "lineage": "0990016e-b9a0-592e-ecd4-f6d27b26995a",
+  "outputs": {
+    "cloudsql_private_ip": {
+      "value": "10.26.0.3",
+      "type": "string"
+    },
+    "cluster_name": {
+      "value": "weather-etl-cluster",
+      "type": "string"
+    },
+    "kubectl_command": {
+      "value": "gcloud container clusters get-credentials weather-etl-cluster --region europe-west1 --project weather-etl-airflow",
+      "type": "string"
+    },
+    "region": {
+      "value": "europe-west1",
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "google_compute_global_address",
+      "name": "private_ip_range",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address": "10.26.0.0",
+            "address_type": "INTERNAL",
+            "creation_timestamp": "2026-04-10T07:57:53.532-07:00",
+            "description": "",
+            "effective_labels": {},
+            "id": "projects/weather-etl-airflow/global/addresses/google-managed-services-range",
+            "ip_version": "",
+            "label_fingerprint": "42WmSpB8rSM=",
+            "labels": {},
+            "name": "google-managed-services-range",
+            "network": "https://www.googleapis.com/compute/v1/projects/weather-etl-airflow/global/networks/weather-etl-cluster-vpc",
+            "prefix_length": 16,
+            "project": "weather-etl-airflow",
+            "purpose": "VPC_PEERING",
+            "self_link": "https://www.googleapis.com/compute/v1/projects/weather-etl-airflow/global/addresses/google-managed-services-range",
+            "terraform_labels": {},
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "google_compute_network.vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_compute_network",
+      "name": "vpc",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "auto_create_subnetworks": false,
+            "delete_default_routes_on_create": false,
+            "description": "",
+            "enable_ula_internal_ipv6": false,
+            "gateway_ipv4": "",
+            "id": "projects/weather-etl-airflow/global/networks/weather-etl-cluster-vpc",
+            "internal_ipv6_range": "",
+            "mtu": 0,
+            "name": "weather-etl-cluster-vpc",
+            "network_firewall_policy_enforcement_order": "AFTER_CLASSIC_FIREWALL",
+            "numeric_id": "6427189704209512585",
+            "project": "weather-etl-airflow",
+            "routing_mode": "REGIONAL",
+            "self_link": "https://www.googleapis.com/compute/v1/projects/weather-etl-airflow/global/networks/weather-etl-cluster-vpc",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19"
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_compute_subnetwork",
+      "name": "subnet",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "creation_timestamp": "2026-04-10T07:17:33.961-07:00",
+            "description": "",
+            "external_ipv6_prefix": "",
+            "fingerprint": null,
+            "gateway_address": "10.0.0.1",
+            "id": "projects/weather-etl-airflow/regions/europe-west1/subnetworks/weather-etl-cluster-subnet",
+            "internal_ipv6_prefix": "",
+            "ip_cidr_range": "10.0.0.0/24",
+            "ipv6_access_type": "",
+            "ipv6_cidr_range": "",
+            "log_config": [],
+            "name": "weather-etl-cluster-subnet",
+            "network": "https://www.googleapis.com/compute/v1/projects/weather-etl-airflow/global/networks/weather-etl-cluster-vpc",
+            "private_ip_google_access": true,
+            "private_ipv6_google_access": "DISABLE_GOOGLE_ACCESS",
+            "project": "weather-etl-airflow",
+            "purpose": "PRIVATE",
+            "region": "europe-west1",
+            "role": "",
+            "secondary_ip_range": [
+              {
+                "ip_cidr_range": "10.37.128.0/17",
+                "range_name": "gke-weather-etl-cluster-pods-2f0a1305"
+              }
+            ],
+            "self_link": "https://www.googleapis.com/compute/v1/projects/weather-etl-airflow/regions/europe-west1/subnetworks/weather-etl-cluster-subnet",
+            "send_secondary_ip_range_if_empty": null,
+            "stack_type": "IPV4_ONLY",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "google_compute_network.vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_container_cluster",
+      "name": "primary",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "addons_config": [
+              {
+                "cloudrun_config": [],
+                "config_connector_config": [],
+                "dns_cache_config": [
+                  {
+                    "enabled": true
+                  }
+                ],
+                "gce_persistent_disk_csi_driver_config": [
+                  {
+                    "enabled": true
+                  }
+                ],
+                "gcp_filestore_csi_driver_config": [
+                  {
+                    "enabled": true
+                  }
+                ],
+                "gcs_fuse_csi_driver_config": [
+                  {
+                    "enabled": true
+                  }
+                ],
+                "gke_backup_agent_config": [],
+                "horizontal_pod_autoscaling": [],
+                "http_load_balancing": [],
+                "network_policy_config": [
+                  {
+                    "disabled": true
+                  }
+                ],
+                "ray_operator_config": [],
+                "stateful_ha_config": [
+                  {
+                    "enabled": true
+                  }
+                ]
+              }
+            ],
+            "allow_net_admin": null,
+            "authenticator_groups_config": [],
+            "binary_authorization": [
+              {
+                "enabled": false,
+                "evaluation_mode": ""
+              }
+            ],
+            "cluster_autoscaling": [
+              {
+                "auto_provisioning_defaults": [
+                  {
+                    "boot_disk_kms_key": "",
+                    "disk_size": 0,
+                    "disk_type": "",
+                    "image_type": "COS_CONTAINERD",
+                    "management": [
+                      {
+                        "auto_repair": true,
+                        "auto_upgrade": true,
+                        "upgrade_options": []
+                      }
+                    ],
+                    "min_cpu_platform": "",
+                    "oauth_scopes": [
+                      "https://www.googleapis.com/auth/devstorage.read_only",
+                      "https://www.googleapis.com/auth/logging.write",
+                      "https://www.googleapis.com/auth/monitoring",
+                      "https://www.googleapis.com/auth/service.management.readonly",
+                      "https://www.googleapis.com/auth/servicecontrol",
+                      "https://www.googleapis.com/auth/trace.append"
+                    ],
+                    "service_account": "default",
+                    "shielded_instance_config": [],
+                    "upgrade_settings": [
+                      {
+                        "blue_green_settings": [],
+                        "max_surge": 1,
+                        "max_unavailable": 0,
+                        "strategy": "SURGE"
+                      }
+                    ]
+                  }
+                ],
+                "auto_provisioning_locations": [],
+                "autoscaling_profile": "OPTIMIZE_UTILIZATION",
+                "enabled": true,
+                "resource_limits": [
+                  {
+                    "maximum": 1000000000,
+                    "minimum": 0,
+                    "resource_type": "cpu"
+                  },
+                  {
+                    "maximum": 1000000000,
+                    "minimum": 0,
+                    "resource_type": "memory"
+                  },
+                  {
+                    "maximum": 1000000000,
+                    "minimum": 0,
+                    "resource_type": "nvidia-tesla-t4"
+                  },
+                  {
+                    "maximum": 1000000000,
+                    "minimum": 0,
+                    "resource_type": "nvidia-tesla-a100"
+                  }
+                ]
+              }
+            ],
+            "cluster_ipv4_cidr": "10.37.128.0/17",
+            "confidential_nodes": [],
+            "cost_management_config": [],
+            "database_encryption": [
+              {
+                "key_name": "",
+                "state": "DECRYPTED"
+              }
+            ],
+            "datapath_provider": "ADVANCED_DATAPATH",
+            "default_max_pods_per_node": 110,
+            "default_snat_status": [
+              {
+                "disabled": false
+              }
+            ],
+            "deletion_protection": true,
+            "description": "",
+            "dns_config": [
+              {
+                "cluster_dns": "CLOUD_DNS",
+                "cluster_dns_domain": "cluster.local",
+                "cluster_dns_scope": "CLUSTER_SCOPE"
+              }
+            ],
+            "enable_autopilot": true,
+            "enable_cilium_clusterwide_network_policy": false,
+            "enable_intranode_visibility": true,
+            "enable_k8s_beta_apis": [],
+            "enable_kubernetes_alpha": false,
+            "enable_l4_ilb_subsetting": false,
+            "enable_legacy_abac": false,
+            "enable_multi_networking": false,
+            "enable_shielded_nodes": true,
+            "enable_tpu": false,
+            "endpoint": "34.52.210.131",
+            "fleet": [],
+            "gateway_api_config": [
+              {
+                "channel": "CHANNEL_STANDARD"
+              }
+            ],
+            "id": "projects/weather-etl-airflow/locations/europe-west1/clusters/weather-etl-cluster",
+            "identity_service_config": [],
+            "initial_node_count": 0,
+            "ip_allocation_policy": [
+              {
+                "additional_pod_ranges_config": [],
+                "cluster_ipv4_cidr_block": "10.37.128.0/17",
+                "cluster_secondary_range_name": "gke-weather-etl-cluster-pods-2f0a1305",
+                "pod_cidr_overprovision_config": [
+                  {
+                    "disabled": false
+                  }
+                ],
+                "services_ipv4_cidr_block": "34.118.224.0/20",
+                "services_secondary_range_name": "",
+                "stack_type": "IPV4"
+              }
+            ],
+            "label_fingerprint": "a9dc16a7",
+            "location": "europe-west1",
+            "logging_config": [
+              {
+                "enable_components": [
+                  "SYSTEM_COMPONENTS",
+                  "WORKLOADS"
+                ]
+              }
+            ],
+            "logging_service": "logging.googleapis.com/kubernetes",
+            "maintenance_policy": [],
+            "master_auth": [
+              {
+                "client_certificate": "",
+                "client_certificate_config": [
+                  {
+                    "issue_client_certificate": false
+                  }
+                ],
+                "client_key": "",
+                "cluster_ca_certificate": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVMVENDQXBXZ0F3SUJBZ0lSQU5rcjFSMFZuYStXa0gvY3NWclpkU2t3RFFZSktvWklodmNOQVFFTEJRQXcKTHpFdE1Dc0dBMVVFQXhNa1ltUTBaR0k0TnpNdFpHVmxNQzAwT0dRMExUazBZamt0WldOaFpUazBNamRrTXprMApNQ0FYRFRJMk1EUXhNREV6TVRreE0xb1lEekl3TlRZd05EQXlNVFF4T1RFeldqQXZNUzB3S3dZRFZRUURFeVJpClpEUmtZamczTXkxa1pXVXdMVFE0WkRRdE9UUmlPUzFsWTJGbE9UUXlOMlF6T1RRd2dnR2lNQTBHQ1NxR1NJYjMKRFFFQkFRVUFBNElCandBd2dnR0tBb0lCZ1FDL3p5ZjJGK1V3WWQwRWlKWElyVVhGVkVyekZvaWY2dnpGc1NmUApyV1JZTk84MUxWc0RIS1pwY2NNQ0V2VForTy94bHR6MmpOU1pYMzg4K2lpbnJFaTRla2NPS0wxWWhUbkcyOVR3CkpVaUVFMGkrU3gvdFlrSEhOUHdqdVYxL1lMMmJQNmtHM2pqOWZGV1dWdmFRNWVTTnh4dWVHa244aVhZYXVzYlAKelZEQjVSb2lhblcvYUZ0SjE4dGM3NzN4TStwaWpYN2dzVHlvMkRmb0ZsUXVzdXN5SWNSaFBsZ3JaNTJVUUxIOAp5Zm15SllwKzAyQTdSckZ3Q3hmZVQyY1NDV2Urck5pSVdDSmVKTExEZVhCeU1UYm4vZGVJdWhxVlY4L0pzRVNkCnNWR3NuSVdJekE1RWsrQkxBdVRyQlFqRmM5TGZycmVpWVpYSGtwNk1vYzRSd2RZbisyb2NOZXcxNmlkQ2dsMG4KTmZhSHYrdTdkRFlabWZGVEtkUm5iZEpFSituUXBIeXRrVGJUQ2tteDFYU29NSDhaYUh1VlRML0Vab3lnSmZlZwp1YlQvcTZwMjYxaGdGdEtWWGNzQWFOeHhBalBkeVpvQ21ndkJLckFsV1RFcGhMUHo2VzEzMUZyblIzMSttZnJKCno5WXVIb0FyY1NycFFLZUlkS1krRU9yM2p0MENBd0VBQWFOQ01FQXdEZ1lEVlIwUEFRSC9CQVFEQWdJRU1BOEcKQTFVZEV3RUIvd1FGTUFNQkFmOHdIUVlEVlIwT0JCWUVGQUk3NmdUUkJZQjVBTGNCbFRQMVdidXZ4OHNhTUEwRwpDU3FHU0liM0RRRUJDd1VBQTRJQmdRQm9mVFRzQlJ4eGFVaURrWDlJeGsvMVBoNWlXcHhRMzc4SThwSWNYbnFXCkdZZ3lmNmxYR0dLcThIMnRtdFM2eUs4cTBFdDRYY0FNQU9wQjZzSExaeVRCNGZTVS9Pd09pcERBcmxueERIRDcKRkdCRUtTVzFHYlVVSjJPTEpJYVowZVEvNVZwUnZlTnVGbGZxaU9MNmRtcVd3MzhGTGVabjRkVW5Nd0ZGMjZxeQpYVkpNQlNXN2tsR3YrQ3N4TWZERUdxdStKT3haaHlEVjl4Y1FjVEhwb1U4SUxWS1JacFNlVFpmbzh2L1A4cnd0ClJVY2FVd21HZWtXS0dmWHdpSk5OZ0lTK1BlWHFwaHZxbjFDNWZSRk9aQXZnWXg2b3pQa1NYbm94c3FkeUdGUzkKWUswNGJUd1dDQ0NRcDRxQ1BYTEVVM09LM0VFZmZ4UUU4N0plWGUySzhxS0hjb0ExUXZKYUZBTm9uQnArdDk3VgoxdzdNMkY1UHJZRGttUTR1eWVJWmJUbmNkRGZDYnBMZnYrTU9Zd0RSc0pSbjdWcVBwVkZlMWtDaDdQSXY2RUV0CkVoSHEwVHRVZm5CYkNTSWpTcWxnb2dVYnVHZkhYM0FiTmpsMUMzNFhDdWFGWi9MZkFlbktTSjdyenVuTUY0QloKY1Y2QWNKMG5NWUk0cSs5SjRRZ3VzUEU9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+              }
+            ],
+            "master_authorized_networks_config": [],
+            "master_version": "1.35.1-gke.1396002",
+            "mesh_certificates": [],
+            "min_master_version": null,
+            "monitoring_config": [
+              {
+                "advanced_datapath_observability_config": [
+                  {
+                    "enable_metrics": true,
+                    "enable_relay": false,
+                    "relay_mode": "DISABLED"
+                  }
+                ],
+                "enable_components": [
+                  "SYSTEM_COMPONENTS",
+                  "STORAGE",
+                  "HPA",
+                  "POD",
+                  "DAEMONSET",
+                  "DEPLOYMENT",
+                  "STATEFULSET",
+                  "JOBSET",
+                  "CADVISOR",
+                  "KUBELET",
+                  "DCGM"
+                ],
+                "managed_prometheus": [
+                  {
+                    "enabled": true
+                  }
+                ]
+              }
+            ],
+            "monitoring_service": "monitoring.googleapis.com/kubernetes",
+            "name": "weather-etl-cluster",
+            "network": "projects/weather-etl-airflow/global/networks/weather-etl-cluster-vpc",
+            "network_policy": [
+              {
+                "enabled": false,
+                "provider": "PROVIDER_UNSPECIFIED"
+              }
+            ],
+            "networking_mode": "VPC_NATIVE",
+            "node_config": [
+              {
+                "advanced_machine_features": [],
+                "boot_disk_kms_key": "",
+                "confidential_nodes": [],
+                "containerd_config": [],
+                "disk_size_gb": 100,
+                "disk_type": "pd-balanced",
+                "effective_taints": [
+                  {
+                    "effect": "NO_SCHEDULE",
+                    "key": "cloud.google.com/gke-quick-remove",
+                    "value": "true"
+                  }
+                ],
+                "enable_confidential_storage": false,
+                "ephemeral_storage_local_ssd_config": [],
+                "fast_socket": [],
+                "gcfs_config": [
+                  {
+                    "enabled": true
+                  }
+                ],
+                "guest_accelerator": [],
+                "gvnic": [
+                  {
+                    "enabled": true
+                  }
+                ],
+                "host_maintenance_policy": [],
+                "image_type": "COS_CONTAINERD",
+                "kubelet_config": [
+                  {
+                    "cpu_cfs_quota": false,
+                    "cpu_cfs_quota_period": "",
+                    "cpu_manager_policy": "",
+                    "insecure_kubelet_readonly_port_enabled": "FALSE",
+                    "pod_pids_limit": 0
+                  }
+                ],
+                "labels": {},
+                "linux_node_config": [],
+                "local_nvme_ssd_block_config": [],
+                "local_ssd_count": 0,
+                "logging_variant": "DEFAULT",
+                "machine_type": "ek-standard-8",
+                "metadata": {
+                  "disable-legacy-endpoints": "true"
+                },
+                "min_cpu_platform": "",
+                "node_group": "",
+                "oauth_scopes": [
+                  "https://www.googleapis.com/auth/devstorage.read_only",
+                  "https://www.googleapis.com/auth/logging.write",
+                  "https://www.googleapis.com/auth/monitoring",
+                  "https://www.googleapis.com/auth/service.management.readonly",
+                  "https://www.googleapis.com/auth/servicecontrol",
+                  "https://www.googleapis.com/auth/trace.append"
+                ],
+                "preemptible": false,
+                "reservation_affinity": [
+                  {
+                    "consume_reservation_type": "NO_RESERVATION",
+                    "key": "",
+                    "values": []
+                  }
+                ],
+                "resource_labels": {
+                  "goog-gke-node-pool-provisioning-model": "on-demand"
+                },
+                "resource_manager_tags": {},
+                "secondary_boot_disks": [],
+                "service_account": "default",
+                "shielded_instance_config": [
+                  {
+                    "enable_integrity_monitoring": true,
+                    "enable_secure_boot": true
+                  }
+                ],
+                "sole_tenant_config": [],
+                "spot": false,
+                "tags": [],
+                "taint": [],
+                "workload_metadata_config": [
+                  {
+                    "mode": "GKE_METADATA"
+                  }
+                ]
+              }
+            ],
+            "node_locations": [
+              "europe-west1-b",
+              "europe-west1-c",
+              "europe-west1-d"
+            ],
+            "node_pool": [
+              {
+                "autoscaling": [
+                  {
+                    "location_policy": "BALANCED",
+                    "max_node_count": 1000,
+                    "min_node_count": 0,
+                    "total_max_node_count": 0,
+                    "total_min_node_count": 0
+                  }
+                ],
+                "initial_node_count": 1,
+                "instance_group_urls": [],
+                "managed_instance_group_urls": [],
+                "management": [
+                  {
+                    "auto_repair": true,
+                    "auto_upgrade": true
+                  }
+                ],
+                "max_pods_per_node": 32,
+                "name": "default-pool",
+                "name_prefix": "",
+                "network_config": [
+                  {
+                    "additional_node_network_configs": [],
+                    "additional_pod_network_configs": [],
+                    "create_pod_range": false,
+                    "enable_private_nodes": false,
+                    "network_performance_config": [],
+                    "pod_cidr_overprovision_config": [],
+                    "pod_ipv4_cidr_block": "10.37.128.0/17",
+                    "pod_range": "gke-weather-etl-cluster-pods-2f0a1305"
+                  }
+                ],
+                "node_config": [
+                  {
+                    "advanced_machine_features": [],
+                    "boot_disk_kms_key": "",
+                    "confidential_nodes": [],
+                    "containerd_config": [],
+                    "disk_size_gb": 100,
+                    "disk_type": "pd-balanced",
+                    "effective_taints": [
+                      {
+                        "effect": "NO_SCHEDULE",
+                        "key": "cloud.google.com/gke-quick-remove",
+                        "value": "true"
+                      }
+                    ],
+                    "enable_confidential_storage": false,
+                    "ephemeral_storage_local_ssd_config": [],
+                    "fast_socket": [],
+                    "gcfs_config": [
+                      {
+                        "enabled": true
+                      }
+                    ],
+                    "guest_accelerator": [],
+                    "gvnic": [
+                      {
+                        "enabled": true
+                      }
+                    ],
+                    "host_maintenance_policy": [],
+                    "image_type": "COS_CONTAINERD",
+                    "kubelet_config": [
+                      {
+                        "cpu_cfs_quota": false,
+                        "cpu_cfs_quota_period": "",
+                        "cpu_manager_policy": "",
+                        "insecure_kubelet_readonly_port_enabled": "FALSE",
+                        "pod_pids_limit": 0
+                      }
+                    ],
+                    "labels": {},
+                    "linux_node_config": [],
+                    "local_nvme_ssd_block_config": [],
+                    "local_ssd_count": 0,
+                    "logging_variant": "DEFAULT",
+                    "machine_type": "ek-standard-8",
+                    "metadata": {
+                      "disable-legacy-endpoints": "true"
+                    },
+                    "min_cpu_platform": "",
+                    "node_group": "",
+                    "oauth_scopes": [
+                      "https://www.googleapis.com/auth/devstorage.read_only",
+                      "https://www.googleapis.com/auth/logging.write",
+                      "https://www.googleapis.com/auth/monitoring",
+                      "https://www.googleapis.com/auth/service.management.readonly",
+                      "https://www.googleapis.com/auth/servicecontrol",
+                      "https://www.googleapis.com/auth/trace.append"
+                    ],
+                    "preemptible": false,
+                    "reservation_affinity": [
+                      {
+                        "consume_reservation_type": "NO_RESERVATION",
+                        "key": "",
+                        "values": []
+                      }
+                    ],
+                    "resource_labels": {
+                      "goog-gke-node-pool-provisioning-model": "on-demand"
+                    },
+                    "resource_manager_tags": {},
+                    "secondary_boot_disks": [],
+                    "service_account": "default",
+                    "shielded_instance_config": [
+                      {
+                        "enable_integrity_monitoring": true,
+                        "enable_secure_boot": true
+                      }
+                    ],
+                    "sole_tenant_config": [],
+                    "spot": false,
+                    "tags": [],
+                    "taint": [],
+                    "workload_metadata_config": [
+                      {
+                        "mode": "GKE_METADATA"
+                      }
+                    ]
+                  }
+                ],
+                "node_count": 0,
+                "node_locations": [
+                  "europe-west1-b"
+                ],
+                "placement_policy": [],
+                "queued_provisioning": [],
+                "upgrade_settings": [
+                  {
+                    "blue_green_settings": [],
+                    "max_surge": 1,
+                    "max_unavailable": 0,
+                    "strategy": "SURGE"
+                  }
+                ],
+                "version": "1.35.1-gke.1396002"
+              },
+              {
+                "autoscaling": [
+                  {
+                    "location_policy": "BALANCED",
+                    "max_node_count": 1000,
+                    "min_node_count": 0,
+                    "total_max_node_count": 0,
+                    "total_min_node_count": 0
+                  }
+                ],
+                "initial_node_count": 0,
+                "instance_group_urls": [],
+                "managed_instance_group_urls": [],
+                "management": [
+                  {
+                    "auto_repair": true,
+                    "auto_upgrade": true
+                  }
+                ],
+                "max_pods_per_node": 64,
+                "name": "pool-1",
+                "name_prefix": "",
+                "network_config": [
+                  {
+                    "additional_node_network_configs": [],
+                    "additional_pod_network_configs": [],
+                    "create_pod_range": false,
+                    "enable_private_nodes": false,
+                    "network_performance_config": [],
+                    "pod_cidr_overprovision_config": [],
+                    "pod_ipv4_cidr_block": "10.37.128.0/17",
+                    "pod_range": "gke-weather-etl-cluster-pods-2f0a1305"
+                  }
+                ],
+                "node_config": [
+                  {
+                    "advanced_machine_features": [],
+                    "boot_disk_kms_key": "",
+                    "confidential_nodes": [],
+                    "containerd_config": [],
+                    "disk_size_gb": 100,
+                    "disk_type": "pd-balanced",
+                    "effective_taints": [],
+                    "enable_confidential_storage": false,
+                    "ephemeral_storage_local_ssd_config": [],
+                    "fast_socket": [],
+                    "gcfs_config": [
+                      {
+                        "enabled": true
+                      }
+                    ],
+                    "guest_accelerator": [],
+                    "gvnic": [
+                      {
+                        "enabled": true
+                      }
+                    ],
+                    "host_maintenance_policy": [],
+                    "image_type": "COS_CONTAINERD",
+                    "kubelet_config": [
+                      {
+                        "cpu_cfs_quota": false,
+                        "cpu_cfs_quota_period": "",
+                        "cpu_manager_policy": "",
+                        "insecure_kubelet_readonly_port_enabled": "FALSE",
+                        "pod_pids_limit": 0
+                      }
+                    ],
+                    "labels": {},
+                    "linux_node_config": [],
+                    "local_nvme_ssd_block_config": [],
+                    "local_ssd_count": 0,
+                    "logging_variant": "DEFAULT",
+                    "machine_type": "ek-standard-8",
+                    "metadata": {
+                      "disable-legacy-endpoints": "true"
+                    },
+                    "min_cpu_platform": "",
+                    "node_group": "",
+                    "oauth_scopes": [
+                      "https://www.googleapis.com/auth/devstorage.read_only",
+                      "https://www.googleapis.com/auth/logging.write",
+                      "https://www.googleapis.com/auth/monitoring",
+                      "https://www.googleapis.com/auth/service.management.readonly",
+                      "https://www.googleapis.com/auth/servicecontrol",
+                      "https://www.googleapis.com/auth/trace.append"
+                    ],
+                    "preemptible": false,
+                    "reservation_affinity": [
+                      {
+                        "consume_reservation_type": "NO_RESERVATION",
+                        "key": "",
+                        "values": []
+                      }
+                    ],
+                    "resource_labels": {
+                      "goog-gke-node-pool-provisioning-model": "on-demand"
+                    },
+                    "resource_manager_tags": {},
+                    "secondary_boot_disks": [],
+                    "service_account": "default",
+                    "shielded_instance_config": [
+                      {
+                        "enable_integrity_monitoring": true,
+                        "enable_secure_boot": true
+                      }
+                    ],
+                    "sole_tenant_config": [],
+                    "spot": false,
+                    "tags": [],
+                    "taint": [],
+                    "workload_metadata_config": [
+                      {
+                        "mode": "GKE_METADATA"
+                      }
+                    ]
+                  }
+                ],
+                "node_count": 0,
+                "node_locations": [
+                  "europe-west1-b",
+                  "europe-west1-c",
+                  "europe-west1-d"
+                ],
+                "placement_policy": [],
+                "queued_provisioning": [],
+                "upgrade_settings": [
+                  {
+                    "blue_green_settings": [],
+                    "max_surge": 1,
+                    "max_unavailable": 0,
+                    "strategy": "SURGE"
+                  }
+                ],
+                "version": "1.35.1-gke.1396002"
+              },
+              {
+                "autoscaling": [
+                  {
+                    "location_policy": "BALANCED",
+                    "max_node_count": 1000,
+                    "min_node_count": 0,
+                    "total_max_node_count": 0,
+                    "total_min_node_count": 0
+                  }
+                ],
+                "initial_node_count": 0,
+                "instance_group_urls": [],
+                "managed_instance_group_urls": [],
+                "management": [
+                  {
+                    "auto_repair": true,
+                    "auto_upgrade": true
+                  }
+                ],
+                "max_pods_per_node": 110,
+                "name": "pool-2",
+                "name_prefix": "",
+                "network_config": [
+                  {
+                    "additional_node_network_configs": [],
+                    "additional_pod_network_configs": [],
+                    "create_pod_range": false,
+                    "enable_private_nodes": false,
+                    "network_performance_config": [],
+                    "pod_cidr_overprovision_config": [],
+                    "pod_ipv4_cidr_block": "10.37.128.0/17",
+                    "pod_range": "gke-weather-etl-cluster-pods-2f0a1305"
+                  }
+                ],
+                "node_config": [
+                  {
+                    "advanced_machine_features": [],
+                    "boot_disk_kms_key": "",
+                    "confidential_nodes": [],
+                    "containerd_config": [],
+                    "disk_size_gb": 100,
+                    "disk_type": "pd-balanced",
+                    "effective_taints": [],
+                    "enable_confidential_storage": false,
+                    "ephemeral_storage_local_ssd_config": [],
+                    "fast_socket": [],
+                    "gcfs_config": [
+                      {
+                        "enabled": true
+                      }
+                    ],
+                    "guest_accelerator": [],
+                    "gvnic": [
+                      {
+                        "enabled": true
+                      }
+                    ],
+                    "host_maintenance_policy": [],
+                    "image_type": "COS_CONTAINERD",
+                    "kubelet_config": [
+                      {
+                        "cpu_cfs_quota": false,
+                        "cpu_cfs_quota_period": "",
+                        "cpu_manager_policy": "",
+                        "insecure_kubelet_readonly_port_enabled": "FALSE",
+                        "pod_pids_limit": 0
+                      }
+                    ],
+                    "labels": {},
+                    "linux_node_config": [],
+                    "local_nvme_ssd_block_config": [],
+                    "local_ssd_count": 0,
+                    "logging_variant": "DEFAULT",
+                    "machine_type": "ek-standard-16",
+                    "metadata": {
+                      "disable-legacy-endpoints": "true"
+                    },
+                    "min_cpu_platform": "",
+                    "node_group": "",
+                    "oauth_scopes": [
+                      "https://www.googleapis.com/auth/devstorage.read_only",
+                      "https://www.googleapis.com/auth/logging.write",
+                      "https://www.googleapis.com/auth/monitoring",
+                      "https://www.googleapis.com/auth/service.management.readonly",
+                      "https://www.googleapis.com/auth/servicecontrol",
+                      "https://www.googleapis.com/auth/trace.append"
+                    ],
+                    "preemptible": false,
+                    "reservation_affinity": [
+                      {
+                        "consume_reservation_type": "NO_RESERVATION",
+                        "key": "",
+                        "values": []
+                      }
+                    ],
+                    "resource_labels": {
+                      "goog-gke-node-pool-provisioning-model": "on-demand"
+                    },
+                    "resource_manager_tags": {},
+                    "secondary_boot_disks": [],
+                    "service_account": "default",
+                    "shielded_instance_config": [
+                      {
+                        "enable_integrity_monitoring": true,
+                        "enable_secure_boot": true
+                      }
+                    ],
+                    "sole_tenant_config": [],
+                    "spot": false,
+                    "tags": [],
+                    "taint": [],
+                    "workload_metadata_config": [
+                      {
+                        "mode": "GKE_METADATA"
+                      }
+                    ]
+                  }
+                ],
+                "node_count": 0,
+                "node_locations": [
+                  "europe-west1-b",
+                  "europe-west1-c",
+                  "europe-west1-d"
+                ],
+                "placement_policy": [],
+                "queued_provisioning": [],
+                "upgrade_settings": [
+                  {
+                    "blue_green_settings": [],
+                    "max_surge": 1,
+                    "max_unavailable": 0,
+                    "strategy": "SURGE"
+                  }
+                ],
+                "version": "1.35.1-gke.1396002"
+              },
+              {
+                "autoscaling": [
+                  {
+                    "location_policy": "BALANCED",
+                    "max_node_count": 1000,
+                    "min_node_count": 0,
+                    "total_max_node_count": 0,
+                    "total_min_node_count": 0
+                  }
+                ],
+                "initial_node_count": 0,
+                "instance_group_urls": [],
+                "managed_instance_group_urls": [],
+                "management": [
+                  {
+                    "auto_repair": true,
+                    "auto_upgrade": true
+                  }
+                ],
+                "max_pods_per_node": 110,
+                "name": "pool-3",
+                "name_prefix": "",
+                "network_config": [
+                  {
+                    "additional_node_network_configs": [],
+                    "additional_pod_network_configs": [],
+                    "create_pod_range": false,
+                    "enable_private_nodes": false,
+                    "network_performance_config": [],
+                    "pod_cidr_overprovision_config": [],
+                    "pod_ipv4_cidr_block": "10.37.128.0/17",
+                    "pod_range": "gke-weather-etl-cluster-pods-2f0a1305"
+                  }
+                ],
+                "node_config": [
+                  {
+                    "advanced_machine_features": [],
+                    "boot_disk_kms_key": "",
+                    "confidential_nodes": [],
+                    "containerd_config": [],
+                    "disk_size_gb": 100,
+                    "disk_type": "pd-balanced",
+                    "effective_taints": [],
+                    "enable_confidential_storage": false,
+                    "ephemeral_storage_local_ssd_config": [],
+                    "fast_socket": [],
+                    "gcfs_config": [
+                      {
+                        "enabled": true
+                      }
+                    ],
+                    "guest_accelerator": [],
+                    "gvnic": [
+                      {
+                        "enabled": true
+                      }
+                    ],
+                    "host_maintenance_policy": [],
+                    "image_type": "COS_CONTAINERD",
+                    "kubelet_config": [
+                      {
+                        "cpu_cfs_quota": false,
+                        "cpu_cfs_quota_period": "",
+                        "cpu_manager_policy": "",
+                        "insecure_kubelet_readonly_port_enabled": "FALSE",
+                        "pod_pids_limit": 0
+                      }
+                    ],
+                    "labels": {},
+                    "linux_node_config": [],
+                    "local_nvme_ssd_block_config": [],
+                    "local_ssd_count": 0,
+                    "logging_variant": "DEFAULT",
+                    "machine_type": "ek-standard-32",
+                    "metadata": {
+                      "disable-legacy-endpoints": "true"
+                    },
+                    "min_cpu_platform": "",
+                    "node_group": "",
+                    "oauth_scopes": [
+                      "https://www.googleapis.com/auth/devstorage.read_only",
+                      "https://www.googleapis.com/auth/logging.write",
+                      "https://www.googleapis.com/auth/monitoring",
+                      "https://www.googleapis.com/auth/service.management.readonly",
+                      "https://www.googleapis.com/auth/servicecontrol",
+                      "https://www.googleapis.com/auth/trace.append"
+                    ],
+                    "preemptible": false,
+                    "reservation_affinity": [
+                      {
+                        "consume_reservation_type": "NO_RESERVATION",
+                        "key": "",
+                        "values": []
+                      }
+                    ],
+                    "resource_labels": {
+                      "goog-gke-node-pool-provisioning-model": "on-demand"
+                    },
+                    "resource_manager_tags": {},
+                    "secondary_boot_disks": [],
+                    "service_account": "default",
+                    "shielded_instance_config": [
+                      {
+                        "enable_integrity_monitoring": true,
+                        "enable_secure_boot": true
+                      }
+                    ],
+                    "sole_tenant_config": [],
+                    "spot": false,
+                    "tags": [],
+                    "taint": [],
+                    "workload_metadata_config": [
+                      {
+                        "mode": "GKE_METADATA"
+                      }
+                    ]
+                  }
+                ],
+                "node_count": 0,
+                "node_locations": [
+                  "europe-west1-b",
+                  "europe-west1-c",
+                  "europe-west1-d"
+                ],
+                "placement_policy": [],
+                "queued_provisioning": [],
+                "upgrade_settings": [
+                  {
+                    "blue_green_settings": [],
+                    "max_surge": 1,
+                    "max_unavailable": 0,
+                    "strategy": "SURGE"
+                  }
+                ],
+                "version": "1.35.1-gke.1396002"
+              },
+              {
+                "autoscaling": [
+                  {
+                    "location_policy": "BALANCED",
+                    "max_node_count": 1000,
+                    "min_node_count": 0,
+                    "total_max_node_count": 0,
+                    "total_min_node_count": 0
+                  }
+                ],
+                "initial_node_count": 0,
+                "instance_group_urls": [],
+                "managed_instance_group_urls": [],
+                "management": [
+                  {
+                    "auto_repair": true,
+                    "auto_upgrade": true
+                  }
+                ],
+                "max_pods_per_node": 32,
+                "name": "nap-1d82368p",
+                "name_prefix": "",
+                "network_config": [
+                  {
+                    "additional_node_network_configs": [],
+                    "additional_pod_network_configs": [],
+                    "create_pod_range": false,
+                    "enable_private_nodes": false,
+                    "network_performance_config": [],
+                    "pod_cidr_overprovision_config": [],
+                    "pod_ipv4_cidr_block": "10.37.128.0/17",
+                    "pod_range": "gke-weather-etl-cluster-pods-2f0a1305"
+                  }
+                ],
+                "node_config": [
+                  {
+                    "advanced_machine_features": [],
+                    "boot_disk_kms_key": "",
+                    "confidential_nodes": [],
+                    "containerd_config": [],
+                    "disk_size_gb": 100,
+                    "disk_type": "pd-balanced",
+                    "effective_taints": [],
+                    "enable_confidential_storage": false,
+                    "ephemeral_storage_local_ssd_config": [],
+                    "fast_socket": [],
+                    "gcfs_config": [
+                      {
+                        "enabled": true
+                      }
+                    ],
+                    "guest_accelerator": [],
+                    "gvnic": [
+                      {
+                        "enabled": true
+                      }
+                    ],
+                    "host_maintenance_policy": [],
+                    "image_type": "COS_CONTAINERD",
+                    "kubelet_config": [
+                      {
+                        "cpu_cfs_quota": false,
+                        "cpu_cfs_quota_period": "",
+                        "cpu_manager_policy": "",
+                        "insecure_kubelet_readonly_port_enabled": "FALSE",
+                        "pod_pids_limit": 0
+                      }
+                    ],
+                    "labels": {},
+                    "linux_node_config": [],
+                    "local_nvme_ssd_block_config": [],
+                    "local_ssd_count": 0,
+                    "logging_variant": "DEFAULT",
+                    "machine_type": "e2-standard-2",
+                    "metadata": {
+                      "disable-legacy-endpoints": "true"
+                    },
+                    "min_cpu_platform": "",
+                    "node_group": "",
+                    "oauth_scopes": [
+                      "https://www.googleapis.com/auth/devstorage.read_only",
+                      "https://www.googleapis.com/auth/logging.write",
+                      "https://www.googleapis.com/auth/monitoring",
+                      "https://www.googleapis.com/auth/service.management.readonly",
+                      "https://www.googleapis.com/auth/servicecontrol",
+                      "https://www.googleapis.com/auth/trace.append"
+                    ],
+                    "preemptible": false,
+                    "reservation_affinity": [
+                      {
+                        "consume_reservation_type": "NO_RESERVATION",
+                        "key": "",
+                        "values": []
+                      }
+                    ],
+                    "resource_labels": {
+                      "goog-gke-node-pool-provisioning-model": "on-demand"
+                    },
+                    "resource_manager_tags": {},
+                    "secondary_boot_disks": [],
+                    "service_account": "default",
+                    "shielded_instance_config": [
+                      {
+                        "enable_integrity_monitoring": true,
+                        "enable_secure_boot": true
+                      }
+                    ],
+                    "sole_tenant_config": [],
+                    "spot": false,
+                    "tags": [],
+                    "taint": [],
+                    "workload_metadata_config": [
+                      {
+                        "mode": "GKE_METADATA"
+                      }
+                    ]
+                  }
+                ],
+                "node_count": 0,
+                "node_locations": [
+                  "europe-west1-b",
+                  "europe-west1-c",
+                  "europe-west1-d"
+                ],
+                "placement_policy": [
+                  {
+                    "policy_name": "",
+                    "tpu_topology": "",
+                    "type": ""
+                  }
+                ],
+                "queued_provisioning": [],
+                "upgrade_settings": [
+                  {
+                    "blue_green_settings": [],
+                    "max_surge": 1,
+                    "max_unavailable": 0,
+                    "strategy": "SURGE"
+                  }
+                ],
+                "version": "1.35.1-gke.1396002"
+              }
+            ],
+            "node_pool_auto_config": [
+              {
+                "network_tags": [],
+                "node_kubelet_config": [
+                  {
+                    "insecure_kubelet_readonly_port_enabled": "FALSE"
+                  }
+                ],
+                "resource_manager_tags": {}
+              }
+            ],
+            "node_pool_defaults": [
+              {
+                "node_config_defaults": [
+                  {
+                    "containerd_config": [],
+                    "insecure_kubelet_readonly_port_enabled": "FALSE",
+                    "logging_variant": "DEFAULT"
+                  }
+                ]
+              }
+            ],
+            "node_version": "1.35.1-gke.1396002",
+            "notification_config": [
+              {
+                "pubsub": [
+                  {
+                    "enabled": false,
+                    "filter": [],
+                    "topic": ""
+                  }
+                ]
+              }
+            ],
+            "operation": null,
+            "private_cluster_config": [
+              {
+                "enable_private_endpoint": false,
+                "enable_private_nodes": false,
+                "master_global_access_config": [
+                  {
+                    "enabled": false
+                  }
+                ],
+                "master_ipv4_cidr_block": "",
+                "peering_name": "",
+                "private_endpoint": "10.0.0.2",
+                "private_endpoint_subnetwork": "",
+                "public_endpoint": "34.52.210.131"
+              }
+            ],
+            "private_ipv6_google_access": "",
+            "project": "weather-etl-airflow",
+            "release_channel": [
+              {
+                "channel": "REGULAR"
+              }
+            ],
+            "remove_default_node_pool": null,
+            "resource_labels": {},
+            "resource_usage_export_config": [],
+            "security_posture_config": [
+              {
+                "mode": "BASIC",
+                "vulnerability_mode": "VULNERABILITY_MODE_UNSPECIFIED"
+              }
+            ],
+            "self_link": "https://container.googleapis.com/v1/projects/weather-etl-airflow/locations/europe-west1/clusters/weather-etl-cluster",
+            "service_external_ips_config": [
+              {
+                "enabled": false
+              }
+            ],
+            "services_ipv4_cidr": "34.118.224.0/20",
+            "subnetwork": "projects/weather-etl-airflow/regions/europe-west1/subnetworks/weather-etl-cluster-subnet",
+            "timeouts": null,
+            "tpu_ipv4_cidr_block": "",
+            "vertical_pod_autoscaling": [
+              {
+                "enabled": true
+              }
+            ],
+            "workload_identity_config": [
+              {
+                "workload_pool": "weather-etl-airflow.svc.id.goog"
+              }
+            ]
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "master_auth"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": 0,
+                  "type": "number"
+                }
+              },
+              {
+                "type": "get_attr",
+                "value": "client_key"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoyNDAwMDAwMDAwMDAwLCJkZWxldGUiOjI0MDAwMDAwMDAwMDAsInJlYWQiOjI0MDAwMDAwMDAwMDAsInVwZGF0ZSI6MzYwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMiJ9",
+          "dependencies": [
+            "google_compute_network.vpc",
+            "google_compute_subnetwork.subnet"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_project_iam_member",
+      "name": "cloudsql_client",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "condition": [],
+            "etag": "BwZPVNNQteI=",
+            "id": "weather-etl-airflow/roles/cloudsql.client/serviceAccount:airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com",
+            "member": "serviceAccount:airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com",
+            "project": "weather-etl-airflow",
+            "role": "roles/cloudsql.client"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "google_service_account.airflow_pods"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_project_iam_member",
+      "name": "storage_admin",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "condition": [],
+            "etag": "BwZPVNNQteI=",
+            "id": "weather-etl-airflow/roles/storage.objectAdmin/serviceAccount:airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com",
+            "member": "serviceAccount:airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com",
+            "project": "weather-etl-airflow",
+            "role": "roles/storage.objectAdmin"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "google_service_account.airflow_pods"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_service_account",
+      "name": "airflow_pods",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_id": "airflow-pods-sa",
+            "create_ignore_already_exists": null,
+            "description": "",
+            "disabled": false,
+            "display_name": "Airflow ETL Pods",
+            "email": "airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com",
+            "id": "projects/weather-etl-airflow/serviceAccounts/airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com",
+            "member": "serviceAccount:airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com",
+            "name": "projects/weather-etl-airflow/serviceAccounts/airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com",
+            "project": "weather-etl-airflow",
+            "timeouts": null,
+            "unique_id": "100029606915944578447"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDB9fQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_service_account_iam_member",
+      "name": "workload_identity",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "condition": [],
+            "etag": "BwZPVNMcCtY=",
+            "id": "projects/weather-etl-airflow/serviceAccounts/airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com/roles/iam.workloadIdentityUser/serviceAccount:weather-etl-airflow.svc.id.goog[airflow/airflow-pods-ksa]",
+            "member": "serviceAccount:weather-etl-airflow.svc.id.goog[airflow/airflow-pods-ksa]",
+            "role": "roles/iam.workloadIdentityUser",
+            "service_account_id": "projects/weather-etl-airflow/serviceAccounts/airflow-pods-sa@weather-etl-airflow.iam.gserviceaccount.com"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "google_service_account.airflow_pods"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_service_networking_connection",
+      "name": "private_vpc_connection",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "deletion_policy": null,
+            "id": "projects%2Fweather-etl-airflow%2Fglobal%2Fnetworks%2Fweather-etl-cluster-vpc:servicenetworking.googleapis.com",
+            "network": "projects/weather-etl-airflow/global/networks/weather-etl-cluster-vpc",
+            "peering": "servicenetworking-googleapis-com",
+            "reserved_peering_ranges": [
+              "google-managed-services-range"
+            ],
+            "service": "servicenetworking.googleapis.com",
+            "timeouts": null,
+            "update_on_creation_fail": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "google_compute_global_address.private_ip_range",
+            "google_compute_network.vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_sql_database",
+      "name": "weather",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "charset": "UTF8",
+            "collation": "en_US.UTF8",
+            "deletion_policy": "DELETE",
+            "id": "projects/weather-etl-airflow/instances/weather-etl-db/databases/weather",
+            "instance": "weather-etl-db",
+            "name": "weather",
+            "project": "weather-etl-airflow",
+            "self_link": "https://sqladmin.googleapis.com/sql/v1beta4/projects/weather-etl-airflow/instances/weather-etl-db/databases/weather",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMCJ9",
+          "dependencies": [
+            "google_compute_global_address.private_ip_range",
+            "google_compute_network.vpc",
+            "google_service_networking_connection.private_vpc_connection",
+            "google_sql_database_instance.postgres"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_sql_database_instance",
+      "name": "postgres",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "available_maintenance_versions": [],
+            "clone": [],
+            "connection_name": "weather-etl-airflow:europe-west1:weather-etl-db",
+            "database_version": "POSTGRES_15",
+            "deletion_protection": false,
+            "dns_name": "",
+            "encryption_key_name": null,
+            "first_ip_address": "10.26.0.3",
+            "id": "weather-etl-db",
+            "instance_type": "CLOUD_SQL_INSTANCE",
+            "ip_address": [
+              {
+                "ip_address": "10.26.0.3",
+                "time_to_retire": "",
+                "type": "PRIVATE"
+              }
+            ],
+            "maintenance_version": "POSTGRES_15_17.R20260319.00_02",
+            "master_instance_name": "",
+            "name": "weather-etl-db",
+            "private_ip_address": "10.26.0.3",
+            "project": "weather-etl-airflow",
+            "psc_service_attachment_link": "",
+            "public_ip_address": "",
+            "region": "europe-west1",
+            "replica_configuration": [],
+            "restore_backup_context": [],
+            "root_password": null,
+            "self_link": "https://sqladmin.googleapis.com/sql/v1beta4/projects/weather-etl-airflow/instances/weather-etl-db",
+            "server_ca_cert": [
+              {
+                "cert": "-----BEGIN CERTIFICATE-----\nMIIDcTCCAlmgAwIBAgIBADANBgkqhkiG9w0BAQsFADBwMS0wKwYDVQQuEyRmMmFj\nYjkwNS04ZjdlLTRmN2QtYWY1Yy1kNDAwZGFjODUxYzIxHDAaBgNVBAMTE0Nsb3Vk\nIFNRTCBTZXJ2ZXIgQ0ExFDASBgNVBAoTC0dvb2dsZSwgSW5jMQswCQYDVQQGEwJV\nUzAeFw0yNjA0MTAxNTAzMDJaFw0zNjA0MDcxNTA0MDJaMHAxLTArBgNVBC4TJGYy\nYWNiOTA1LThmN2UtNGY3ZC1hZjVjLWQ0MDBkYWM4NTFjMjEcMBoGA1UEAxMTQ2xv\ndWQgU1FMIFNlcnZlciBDQTEUMBIGA1UEChMLR29vZ2xlLCBJbmMxCzAJBgNVBAYT\nAlVTMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuZvrRSXRQIbmcIJo\nveePaJc3D9Q2jxtEwbol5m4zoBzq81m0V92yn3Ibk+UTeooCfZnmm2i6cD8TG1qi\nA/4S4XHouP8v6qpxiRXQ1Zgyzj9DQuICvBSr27VruTHUnJHWAppJXrujdb+S3skr\nffmadwJL/3U+QzSLVPNCsMGmgogVWKNy/tWQqedlVsFExYSu6v4cW609WVGnARjv\n4N090kCvacum+Yss1Z9iV5E74KHVRv2lksaFl42KRBssoRODXC7/KMfID9Uw0Med\njtshvFtAqpdyG/ZKx8DEnKY7ev9CuNY/pVXBE85/vLXFqrEkClEFW2ghDHwE6eUJ\nBYx2CQIDAQABoxYwFDASBgNVHRMBAf8ECDAGAQH/AgEAMA0GCSqGSIb3DQEBCwUA\nA4IBAQBXNbyS2XcmdTpAjQhmrQAc75jn6XgC9AFkJMVKjHG5iG712Plb5df+0lP0\n6cqiktJNeRuBDDU5TcE+P16xN3KbDWX4n/hi45LYCKIcrEwekJGPndlgZ2dQiaqM\n+r2TqdDjlGK5v4ecvyz6k1hP6ZHvDidXeVzrxRF+XRzBzkfd+rIJ1qXK7PyEuHKW\nAbfNCH1BUS8CW2g4B7bevYCI94wDwLYpDjP2QM6SjKKMntSFgmqypTgyElW+53KP\nDAMWUA9Xzz/7DZIaCJhwcaBY0icYDvZuTUnPIIJ9t+m845XqDDNqs9quxtlbdUKi\nrrqRxVinOuc+BSwdZM4aOw5CT9NW\n-----END CERTIFICATE-----",
+                "common_name": "C=US,O=Google\\, Inc,CN=Cloud SQL Server CA,dnQualifier=f2acb905-8f7e-4f7d-af5c-d400dac851c2",
+                "create_time": "2026-04-10T15:03:02.790Z",
+                "expiration_time": "2036-04-07T15:04:02.790Z",
+                "sha1_fingerprint": "a563769ce6369e3aedb7ee8438a900faf4b8687b"
+              }
+            ],
+            "service_account_email_address": "p513587268776-2ier7w@gcp-sa-cloud-sql.iam.gserviceaccount.com",
+            "settings": [
+              {
+                "activation_policy": "ALWAYS",
+                "active_directory_config": [],
+                "advanced_machine_features": [],
+                "availability_type": "ZONAL",
+                "backup_configuration": [
+                  {
+                    "backup_retention_settings": [
+                      {
+                        "retained_backups": 7,
+                        "retention_unit": "COUNT"
+                      }
+                    ],
+                    "binary_log_enabled": false,
+                    "enabled": true,
+                    "location": "",
+                    "point_in_time_recovery_enabled": false,
+                    "start_time": "23:00",
+                    "transaction_log_retention_days": 7
+                  }
+                ],
+                "collation": "",
+                "connector_enforcement": "NOT_REQUIRED",
+                "data_cache_config": [],
+                "database_flags": [],
+                "deletion_protection_enabled": false,
+                "deny_maintenance_period": [],
+                "disk_autoresize": true,
+                "disk_autoresize_limit": 0,
+                "disk_size": 10,
+                "disk_type": "PD_SSD",
+                "edition": "ENTERPRISE",
+                "enable_dataplex_integration": false,
+                "enable_google_ml_integration": false,
+                "insights_config": [],
+                "ip_configuration": [
+                  {
+                    "allocated_ip_range": "",
+                    "authorized_networks": [],
+                    "enable_private_path_for_google_cloud_services": false,
+                    "ipv4_enabled": false,
+                    "private_network": "projects/weather-etl-airflow/global/networks/weather-etl-cluster-vpc",
+                    "psc_config": [],
+                    "require_ssl": false,
+                    "server_ca_mode": "GOOGLE_MANAGED_INTERNAL_CA",
+                    "ssl_mode": ""
+                  }
+                ],
+                "location_preference": [
+                  {
+                    "follow_gae_application": "",
+                    "secondary_zone": "",
+                    "zone": "europe-west1-b"
+                  }
+                ],
+                "maintenance_window": [],
+                "password_validation_policy": [],
+                "pricing_plan": "PER_USE",
+                "sql_server_audit_config": [],
+                "tier": "db-f1-micro",
+                "time_zone": "",
+                "user_labels": {},
+                "version": 8
+              }
+            ],
+            "timeouts": null
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "root_password"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "server_ca_cert"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo1NDAwMDAwMDAwMDAwLCJkZWxldGUiOjU0MDAwMDAwMDAwMDAsInVwZGF0ZSI6NTQwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "google_compute_global_address.private_ip_range",
+            "google_compute_network.vpc",
+            "google_service_networking_connection.private_vpc_connection"
+          ]
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}

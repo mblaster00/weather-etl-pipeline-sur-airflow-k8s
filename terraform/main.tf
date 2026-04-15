@@ -26,10 +26,22 @@ resource "google_compute_subnetwork" "subnet" {
 
 # Le cluster GKE en mode Autopilot
 resource "google_container_cluster" "primary" {
-  name     = var.cluster_name
-  location = var.region
+  name                = var.cluster_name
+  location            = var.region
+  deletion_protection = false
 
-  enable_autopilot = true
+  enable_autopilot = false
+
+  initial_node_count = 2
+
+  node_config {
+    machine_type = "e2-standard-2"
+    disk_size_gb = 20        # reduce from 50 to 20
+    disk_type    = "pd-standard"  # use HDD instead of SSD
+    oauth_scopes = [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ]
+  }
 
   network    = google_compute_network.vpc.name
   subnetwork = google_compute_subnetwork.subnet.name

@@ -1,4 +1,4 @@
-executor: KubernetesExecutor
+executor: LocalExecutor
 
 airflowVersion: "2.11.0"
 defaultAirflowTag: "2.11.0"
@@ -6,10 +6,7 @@ defaultAirflowTag: "2.11.0"
 webserverSecretKeySecretName: airflow-webserver-secret-key
 webserverSecretKeySecretKey: webserver-secret-key
 
-webserver:
-  startupProbe:
-    failureThreshold: 30
-    periodSeconds: 20
+createUserJob:
   defaultUser:
     enabled: true
     role: Admin
@@ -19,13 +16,24 @@ webserver:
     lastName: lastname
     password: "placeholder"
 
+webserver:
+  startupProbe:
+    failureThreshold: 30
+    periodSeconds: 20
+
 secret:
   - envName: AIRFLOW__WEBSERVER__SECRET_KEY
     secretName: airflow-webserver-secret
     secretKey: password
 
 data:
-  metadataSecretName: airflow-metadata-secret
+  metadataConnection:
+    user: postgres
+    pass: lpmss1998
+    host: airflow-postgresql.airflow
+    port: 5432
+    db: airflow
+    sslmode: disable
 
 dags:
   gitSync:
