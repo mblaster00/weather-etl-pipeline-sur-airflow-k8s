@@ -27,13 +27,7 @@ secret:
     secretKey: password
 
 data:
-  metadataConnection:
-    user: postgres
-    pass: "placeholder"
-    host: airflow-postgresql.airflow
-    port: 5432
-    db: airflow
-    sslmode: disable
+  metadataSecretName: airflow-metadata-secret
 
 dags:
   gitSync:
