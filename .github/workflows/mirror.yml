@@ -1,3 +1,4 @@
+
 name: Mirror to GitLab
 
 on:
@@ -14,4 +15,4 @@ jobs:
           fetch-depth: 0
       - run: |
           git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/meisterpod/${{ github.event.repository.name }}.git
-          git push gitlab --mirror
+          git push gitlab --prune "refs/heads/*:refs/heads/*" "refs/tags/*:refs/tags/*"
